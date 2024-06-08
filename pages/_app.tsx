@@ -15,8 +15,8 @@ import {
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 
 const config = getDefaultConfig({
-  appName: 'RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
+  appName: 'defi-sync',
+  projectId: 'cb8f494e6a55001a74afd3d18bf602f6',
   chains: [
     mainnet,
     polygon,

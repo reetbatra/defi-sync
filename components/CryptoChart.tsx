@@ -1,72 +1,29 @@
 // src/components/CryptoChart.tsx
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import React, { useState } from 'react';
+import SingleTokenChart from './SingleTokenChart';
 
 const CryptoChart = () => {
-  const [chartData, setChartData] = useState<any>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const apiKey = '5706669dcf7d5db98c3d53a63ecf98d3791cb0213b8812d038537c7fc258fc75';
-      const url = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=30&api_key=${apiKey}`;
-
-      try {
-        const response = await axios.get(url);
-        const data = response.data.Data.Data;
-        const labels = data.map((item: any) => new Date(item.time * 1000).toLocaleDateString());
-        const prices = data.map((item: any) => item.close);
-
-        setChartData({
-          labels,
-          datasets: [
-            {
-              label: 'BTC Price',
-              data: prices,
-              fill: false,
-              backgroundColor: 'rgba(75,192,192,0.4)',
-              borderColor: 'rgba(75,192,192,1)',
-            },
-          ],
-        });
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data', error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
+  const [filter, setFilter] = useState<string>('month');
+  const tokens = ['BTC', 'ETH', 'USDT', 'DOGE'];
+  const colors = ['rgba(75,192,192,1)', 'rgba(255,99,132,1)', 'rgba(54,162,235,1)', 'rgba(255,206,86,1)'];
 
   return (
     <div>
-      <Line data={chartData} />
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+        <button onClick={() => setFilter('day')} style={{ margin: '0 1rem' }}>Day</button>
+        <button onClick={() => setFilter('week')} style={{ margin: '0 1rem' }}>Week</button>
+        <button onClick={() => setFilter('month')} style={{ margin: '0 1rem' }}>Month</button>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+        {tokens.map((token, index) => (
+          <div key={token} style={{ width: '45%', marginBottom: '2rem' }}>
+            <SingleTokenChart token={token} filter={filter} color={colors[index]} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default CryptoChart;
+
