@@ -1,3 +1,5 @@
+# Video demo [link](https://youtu.be/4ZUAlbGc244)
+
 This is a [RainbowKit](https://rainbowkit.com) + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org/) project bootstrapped with [`create-rainbowkit`](/packages/create-rainbowkit).
 
 ## Getting Started
