@@ -16,7 +16,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
           <div style={{ position: 'absolute', top: 0, right: 0, padding: '1rem', display: 'flex', gap: '1rem' }}>
-            <button
+{/*             <button
               style={{
                 padding: '0.5rem 1rem',
                 borderRadius: '10px',
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
               }}
             >
               Swap
-            </button>
+            </button> */}
             <ConnectButton />
           </div>
           <h1 style={{ textAlign: 'center', marginTop: '1rem', fontSize: '2rem', fontWeight: 'bold' }}>
